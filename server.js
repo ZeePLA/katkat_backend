@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const router = require("./api-routes/mainRouter");
 const cors = require("cors");
-const { pool, client } = require("./database/db");
+const { client } = require("./database/db");
 
 // Middlewares
 app.use(express.json());
