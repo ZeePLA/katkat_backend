@@ -60,7 +60,7 @@ router.post("/auth/register", async (req, res) => {
 router.post("/auth/login", async (req, res) => {
   const { email, password } = req.body;
   try {
-    // Checking if email exists
+    //Checking if email registered before.
     const emailQueryText = "SELECT COUNT(*) FROM users WHERE email=$1";
     const emailQueryValues = [email];
     const emailResult = await client.query(emailQueryText, emailQueryValues);
@@ -69,8 +69,7 @@ router.post("/auth/login", async (req, res) => {
     if (!emailExists) {
       return res.status(401).json({ message: "Incorrect credentials." });
     }
-
-    // Fetching stored password for the email
+    //Checking if password stored in database.
     const passQueryText = "SELECT password FROM users WHERE email=$1";
     const passQueryValues = [email];
     const passResult = await client.query(passQueryText, passQueryValues);

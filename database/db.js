@@ -24,7 +24,7 @@ const renderPool = new Pool({
   port: "5432",
   database: process.env.DATABASE,
   ssl: {
-    rejectUnauthorized: false, // Allows SSL connections without certificate validation
+    rejectUnauthorized: false,
   },
 });
 
@@ -35,7 +35,7 @@ const renderClient = new Pool({
   port: "5432",
   database: process.env.DATABASE,
   ssl: {
-    rejectUnauthorized: false, // Allows SSL connections without certificate validation
+    rejectUnauthorized: false,
   },
 });
 
