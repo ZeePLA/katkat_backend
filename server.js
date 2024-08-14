@@ -1,8 +1,9 @@
+require("dotenv").config({ path: "./live.env" });
 const express = require("express");
 const app = express();
 const router = require("./api-routes/mainRouter");
 const cors = require("cors");
-const { client } = require("./database/db");
+const { localClient, renderClient } = require("./database/db");
 
 // Middlewares
 app.use(express.json());
@@ -11,9 +12,9 @@ app.use(cors());
 
 app.use("/", router);
 
-const PORT = 5001;
+const PORT = process.env.BACKEND_PORT;
 
-if (client.connect()) {
+if (renderClient.connect()) {
   console.log(`Connection established with database.`);
   app.listen(PORT, () => {
     console.log(`Backend is up on port ${PORT}`);
