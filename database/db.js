@@ -1,45 +1,38 @@
-require("dotenv").config({ path: "../live.env" });
-const { Pool, Client } = require("pg");
+import dotenv from "dotenv";
+dotenv.config({ path: "./live.env" });
+import { Sequelize } from "sequelize";
 
-const localPool = new Pool({
-  user: "postgres",
-  password: "admin",
-  host: "localhost",
-  port: "5432",
-  database: "postgres",
-});
-
-const localClient = new Client({
-  user: "postgres",
-  password: "admin",
-  host: "localhost",
-  port: "5432",
-  database: "postgres",
-});
-
-const renderPool = new Pool({
-  user: process.env.DB_USERNAME,
-  password: process.env.DB_PASSWORD,
+const sequelize = new Sequelize({
+  dialect: "postgres",
+  database: process.env.DB_NAME,
+  username: process.env.DB_USER,
+  password: process.env.DB_PASS,
   host: process.env.DB_HOST,
-  port: "5432",
-  database: process.env.DATABASE,
-  ssl: {
-    rejectUnauthorized: false,
-  },
+  port: process.env.DB_PORT,
+  //dialectOptions: { ssl: process.env.DB_SSL === "true" },
+  logging: false, // Disables the logging of SQL queries
 });
 
-const renderClient = new Pool({
-  user: process.env.DB_USERNAME,
-  password: process.env.DB_PASSWORD,
-  host: process.env.DB_HOST,
-  port: "5432",
-  database: process.env.DATABASE,
-  ssl: {
-    rejectUnauthorized: false,
-  },
-});
+// Logs in with sequelize instance
+async function dbLogin() {
+  try {
+    await sequelize.authenticate();
+    console.log("Connection to database has been established successfully.");
+  } catch (err) {
+    console.error("Unable to connect to the database", err);
+  }
+}
 
-module.exports = { localPool, localClient, renderPool, renderClient };
+// Initialize models with the Sequelize instance
+async function syncAll() {
+  try {
+    await sequelize.sync({ force: true });
+    console.log("All tables created successfully!");
+  } catch (err) {
+    console.error("Unable to create table: ", err);
+  }
+}
+export { sequelize, dbLogin, syncAll };
 
 /* PARAMETERIZED QUERY EXAMPLE
 
@@ -63,6 +56,3 @@ try {
   client.release()
 }
 */
-
-// Query configurations
-// https://node-postgres.com/features/queries
