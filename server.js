@@ -68,6 +68,9 @@ app.use(morgan("dev"));
 
 //router
 app.use("/", router);
+app.get("/test", (req, res) => {
+  res.status(200).json("katkat-backend is active! on render");
+});
 
 app.listen(process.env.BACKEND_PORT, async () => {
   await dbLogin();
