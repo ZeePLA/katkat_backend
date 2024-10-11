@@ -1,5 +1,5 @@
 import dotenv from "dotenv";
-dotenv.config({ path: "./live.env" });
+dotenv.config({ path: "./.env" });
 import path from "path";
 import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);

@@ -8,6 +8,8 @@ import { fileUploader, FileUploader } from "../utils/multer.js";
 router.use("/statics", staticsRouter);
 router.use("/auth", authRouter);
 
+router.post("/dbSync", (req, res) => {});
+
 router.post(
   "/upload-single",
   fileUploader.uploadSingle("uploadFile", "profpict"),

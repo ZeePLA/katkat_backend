@@ -1,5 +1,5 @@
 import dotenv from "dotenv";
-dotenv.config({ path: "./live.env" });
+dotenv.config({ path: "./.env" });
 import express from "express";
 import router from "./api-routes/router.js";
 import cookieParser from "cookie-parser";

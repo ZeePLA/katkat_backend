@@ -1,5 +1,5 @@
 import dotenv from "dotenv";
-dotenv.config({ path: "./live.env" });
+dotenv.config({ path: "./.env" });
 import { Sequelize } from "sequelize";
 
 const sequelize = new Sequelize({
@@ -9,7 +9,7 @@ const sequelize = new Sequelize({
   password: process.env.DB_PASS,
   host: process.env.DB_HOST,
   port: process.env.DB_PORT,
-  //dialectOptions: { ssl: process.env.DB_SSL === "true" },
+  dialectOptions: { ssl: process.env.DB_SSL === "true" },
   logging: false, // Disables the logging of SQL queries
 });
 
