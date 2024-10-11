@@ -6,7 +6,7 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import helmet from "helmet";
 import morgan from "morgan";
-import { dbLogin, syncAll } from "./database/db.js";
+import { dbLogin } from "./database/db.js";
 
 const app = express();
 
@@ -71,6 +71,5 @@ app.use("/", router);
 
 app.listen(process.env.BACKEND_PORT, async () => {
   await dbLogin();
-  //await syncAll();
   console.log(`Node Server Is Running On Port ${process.env.BACKEND_PORT}`);
 });
