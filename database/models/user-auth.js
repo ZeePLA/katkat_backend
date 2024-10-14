@@ -34,8 +34,8 @@ UserAuth.init(
       field: "refresh_token",
     },
     userLevel: {
-      type: DataTypes.ENUM("basic", "office-user", "admin"),
-      defaultValue: "basic",
+      type: DataTypes.ENUM("guest", "client", "admin"),
+      defaultValue: "guest",
       allowNull: false,
       field: "user_level",
     },
@@ -68,3 +68,12 @@ UserAuth.init(
 );
 
 export default UserAuth;
+
+/*
+const roles = 
+{
+  admin: ['read', 'write', 'delete'],
+  user: ['read'],
+  guest: [],
+};
+*/
